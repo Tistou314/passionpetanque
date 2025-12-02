@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.passionpetanque.info/sitemap.xml
+
+# Blocage des ressources non essentielles
+Disallow: /css/
+Disallow: /js/

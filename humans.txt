@@ -1,0 +1,18 @@
+/* TEAM */
+Site: Passion Pétanque
+Contact: contact [at] example.com
+Location: France
+
+/* THANKS */
+La communauté des boulistes
+La FFPJP pour la promotion de la pétanque
+Tous les clubs de pétanque de France
+
+/* SITE */
+Last update: 2024/01/15
+Language: French
+Doctype: HTML5
+IDE: Visual Studio Code
+Standards: HTML5, CSS3, JavaScript ES6
+Components: Google Fonts (Playfair Display, Source Sans Pro)
+Software: Passion for pétanque!

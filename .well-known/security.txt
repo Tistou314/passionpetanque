@@ -1,0 +1,26 @@
+# Security.txt pour Passion Pétanque
+# Voir https://securitytxt.org/ pour plus d'informations
+
+# Contact pour signaler une vulnérabilité de sécurité
+Contact: mailto:security@example.com
+
+# Clé PGP (optionnel - à ajouter si disponible)
+# Encryption: https://www.example.com/pgp-key.txt
+
+# Politique de divulgation
+# Policy: https://www.example.com/security-policy.html
+
+# Reconnaissance des chercheurs en sécurité
+# Acknowledgments: https://www.example.com/security-hall-of-fame.html
+
+# Langues préférées
+Preferred-Languages: fr, en
+
+# Date d'expiration de ce fichier (à mettre à jour annuellement)
+Expires: 2025-12-31T23:59:59.000Z
+
+# Emplois dans la sécurité (optionnel)
+# Hiring: https://www.example.com/jobs/security
+
+# Canonical URL
+Canonical: https://www.example.com/.well-known/security.txt
