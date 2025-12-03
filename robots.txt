@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://www.passionpetanque.info/sitemap.xml
 
-# Blocage des ressources non essentielles
-Disallow: /css/
-Disallow: /js/
+# Crawl-delay optionnel (évite surcharge serveur)
+Crawl-delay: 1
