@@ -46,6 +46,257 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.min.css?v=4">
 
+    <!-- Configurateur inline styles (scoped .cfg-) -->
+    <style>
+    /* ═══════════════════════════════════════════════
+       CONFIGURATEUR — préfixé .cfg- pour isolation
+       ═══════════════════════════════════════════════ */
+    .cfg-wrap{
+        max-width:100%;
+        margin:40px 0;
+        padding:32px 28px;
+        background:#f8f7f4;
+        border:1px solid #e5e1d8;
+        border-radius:6px;
+    }
+    @media(max-width:600px){
+        .cfg-wrap{padding:24px 18px;margin:32px 0}
+    }
+
+    /* Header */
+    .cfg-header{margin-bottom:28px}
+    .cfg-header h2{
+        font-family:'Playfair Display',Georgia,serif;
+        font-size:22px;
+        font-weight:700;
+        line-height:1.3;
+        margin:0 0 6px;
+        color:#1a1a1a;
+    }
+    .cfg-header p{
+        font-size:14px;
+        color:#6b6b6b;
+        margin:0;
+        line-height:1.5;
+    }
+
+    /* Step counter */
+    .cfg-steps{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        margin-bottom:20px;
+        font-size:13px;
+        font-weight:600;
+        color:#999;
+    }
+    .cfg-bar{
+        flex:1;height:2px;
+        background:#ddd;
+        border-radius:1px;
+        overflow:hidden;
+    }
+    .cfg-bar-fill{
+        height:100%;
+        background:#5a7a5a;
+        transition:width 0.4s ease;
+    }
+
+    /* Question blocks */
+    .cfg-q{display:none;animation:cfgFade 0.3s ease}
+    .cfg-q.cfg-active{display:block}
+    @keyframes cfgFade{
+        from{opacity:0;transform:translateY(10px)}
+        to{opacity:1;transform:translateY(0)}
+    }
+
+    .cfg-q h3{
+        font-family:'Playfair Display',Georgia,serif;
+        font-size:18px;
+        font-weight:400;
+        margin:0 0 4px;
+        color:#1a1a1a;
+    }
+    .cfg-hint{
+        font-size:13px;
+        color:#888;
+        margin:0 0 16px;
+    }
+
+    /* Choices */
+    .cfg-choices{
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+        margin-bottom:24px;
+    }
+    .cfg-choice{
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:12px 16px;
+        border:1.5px solid #d9d5cc;
+        border-radius:6px;
+        background:#fff;
+        cursor:pointer;
+        transition:all 0.15s ease;
+        user-select:none;
+    }
+    .cfg-choice:hover{border-color:#aaa}
+    .cfg-choice.cfg-sel{
+        background:#2c2c2c;
+        border-color:#2c2c2c;
+        color:#f5f4f0;
+    }
+    .cfg-choice.cfg-sel .cfg-csub{color:rgba(245,244,240,0.6)}
+    .cfg-choice.cfg-sel .cfg-dot{border-color:#5a7a5a;background:#5a7a5a}
+    .cfg-choice.cfg-sel .cfg-dot::after{
+        content:'';position:absolute;
+        top:4px;left:4px;width:6px;height:6px;
+        border-radius:50%;background:#fff;
+    }
+
+    .cfg-dot{
+        width:18px;height:18px;
+        border-radius:50%;
+        border:2px solid #ccc;
+        flex-shrink:0;
+        position:relative;
+        transition:all 0.15s ease;
+    }
+
+    .cfg-clabel{font-weight:600;font-size:14px;line-height:1.3}
+    .cfg-csub{font-size:12.5px;color:#888;transition:color 0.15s}
+
+    /* Slider */
+    .cfg-slider-block{margin-bottom:24px}
+    .cfg-sdisp{text-align:center;margin-bottom:14px}
+    .cfg-sdisp .cfg-snum{
+        font-family:'Playfair Display',Georgia,serif;
+        font-size:44px;font-weight:700;color:#1a1a1a;line-height:1;
+    }
+    .cfg-sdisp .cfg-smm{font-size:16px;color:#999;margin-left:2px}
+
+    .cfg-wrap input[type=range]{
+        -webkit-appearance:none;
+        width:100%;height:3px;
+        background:#d9d5cc;
+        border-radius:2px;
+        outline:none;cursor:pointer;
+        margin:0;
+    }
+    .cfg-wrap input[type=range]::-webkit-slider-thumb{
+        -webkit-appearance:none;
+        width:20px;height:20px;
+        background:#fff;
+        border:2px solid #2c2c2c;
+        border-radius:50%;cursor:grab;
+        box-shadow:0 1px 3px rgba(0,0,0,0.1);
+    }
+    .cfg-wrap input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
+    .cfg-wrap input[type=range]::-moz-range-thumb{
+        width:20px;height:20px;
+        background:#fff;border:2px solid #2c2c2c;
+        border-radius:50%;cursor:grab;
+        box-shadow:0 1px 3px rgba(0,0,0,0.1);
+    }
+    .cfg-slabels{
+        display:flex;justify-content:space-between;
+        font-size:11px;color:#aaa;margin-top:4px;
+    }
+    .cfg-shint{
+        margin-top:12px;padding:10px 12px;
+        background:#eeedea;border-radius:4px;
+        font-size:13px;color:#5a5a4a;line-height:1.4;
+    }
+
+    /* Actions */
+    .cfg-actions{display:flex;gap:8px}
+    .cfg-btn{
+        padding:10px 24px;
+        font-family:'Inter',sans-serif;
+        font-size:13px;font-weight:600;
+        border-radius:5px;cursor:pointer;
+        transition:all 0.12s ease;border:none;
+    }
+    .cfg-prev{
+        background:transparent;
+        border:1.5px solid #d9d5cc;
+        color:#777;
+    }
+    .cfg-prev:hover{border-color:#999;color:#333}
+    .cfg-next{
+        background:#2c2c2c;color:#f5f4f0;
+        margin-left:auto;
+    }
+    .cfg-next:hover{background:#444}
+    .cfg-next:disabled{opacity:0.3;cursor:default}
+    .cfg-next:disabled:hover{background:#2c2c2c}
+
+    /* ══════ RESULT ══════ */
+    .cfg-result{display:none;animation:cfgFade 0.35s ease}
+    .cfg-result.cfg-active{display:block}
+
+    .cfg-rtitle{
+        font-family:'Playfair Display',Georgia,serif;
+        font-size:20px;font-weight:700;margin:0 0 3px;color:#1a1a1a;
+    }
+    .cfg-rsub{font-size:13px;color:#888;margin:0 0 24px}
+
+    .cfg-specs{border-top:2px solid #2c2c2c;margin-bottom:28px}
+    .cfg-srow{
+        display:flex;justify-content:space-between;align-items:baseline;
+        padding:12px 0;border-bottom:1px solid #e8e4dc;
+    }
+    .cfg-slbl{
+        font-size:12px;font-weight:600;
+        text-transform:uppercase;letter-spacing:0.7px;
+        color:#999;
+    }
+    .cfg-sval{text-align:right}
+    .cfg-smain{
+        font-family:'Playfair Display',Georgia,serif;
+        font-size:16px;font-weight:400;color:#1a1a1a;
+    }
+    .cfg-sdet{font-size:11.5px;color:#999;margin-top:1px}
+
+    .cfg-profile{
+        background:#2c2c2c;color:#f5f4f0;
+        padding:20px;border-radius:6px;margin-bottom:20px;
+    }
+    .cfg-profile h4{
+        font-family:'Playfair Display',Georgia,serif;
+        font-size:16px;font-weight:400;margin:0 0 8px;
+    }
+    .cfg-profile p{font-size:13px;line-height:1.6;opacity:0.85;margin:0}
+
+    .cfg-tips{margin-bottom:24px}
+    .cfg-tips h4{
+        font-size:13px;font-weight:700;
+        text-transform:uppercase;letter-spacing:0.5px;
+        color:#5a7a5a;margin:0 0 10px;
+    }
+    .cfg-tips ul{list-style:none;margin:0;padding:0}
+    .cfg-tips li{
+        font-size:13px;line-height:1.5;color:#555;
+        margin-bottom:6px;padding-left:14px;position:relative;
+    }
+    .cfg-tips li::before{
+        content:'–';position:absolute;left:0;
+        color:#5a7a5a;font-weight:700;
+    }
+
+    .cfg-reset{
+        display:inline-flex;align-items:center;gap:5px;
+        padding:10px 20px;background:transparent;
+        border:1.5px solid #d9d5cc;border-radius:5px;
+        font-family:'Inter',sans-serif;font-size:13px;
+        font-weight:600;color:#777;cursor:pointer;
+        transition:all 0.12s ease;
+    }
+    .cfg-reset:hover{border-color:#999;color:#333}
+    </style>
+
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     {
@@ -236,6 +487,113 @@
 
                     <p>Diamètre, poids, dureté, matériau, stries... de nombreux critères entrent en compte pour choisir sa boule de pétanque. Trouver la triplette adaptée à sa morphologie et son style de jeu est essentiel pour tout joueur souhaitant progresser. <a href="technique-pointage">Pointeur</a>, <a href="technique-tir">tireur</a> ou milieu, ce guide vous accompagne dans le choix des boules de pétanque correspondant à vos besoins.</p>
 
+
+                    <!-- ═══════════════════════════════════════
+                         CONFIGURATEUR INTERACTIF
+                         ═══════════════════════════════════════ -->
+                    <div class="cfg-wrap" id="configurateur">
+
+                        <div class="cfg-header">
+                            <h2>Trouvez la boule adaptée à votre profil</h2>
+                            <p>Répondez à 5 questions pour obtenir une recommandation personnalisée.</p>
+                        </div>
+
+                        <div class="cfg-steps">
+                            <span id="cfgLabel">1 / 5</span>
+                            <div class="cfg-bar"><div class="cfg-bar-fill" id="cfgBar" style="width:20%"></div></div>
+                        </div>
+
+                        <!-- Q1 — Niveau -->
+                        <div class="cfg-q cfg-active" id="cfgQ1">
+                            <h3>Quel est votre niveau de pratique ?</h3>
+                            <p class="cfg-hint">Le type de boule dépend de votre fréquence de jeu.</p>
+                            <div class="cfg-choices" data-q="1">
+                                <div class="cfg-choice" data-v="loisir"><span class="cfg-dot"></span><div><div class="cfg-clabel">Loisir</div><div class="cfg-csub">Parties occasionnelles entre amis ou en vacances</div></div></div>
+                                <div class="cfg-choice" data-v="regulier"><span class="cfg-dot"></span><div><div class="cfg-clabel">Régulier</div><div class="cfg-csub">Club ou parties chaque semaine</div></div></div>
+                                <div class="cfg-choice" data-v="competition"><span class="cfg-dot"></span><div><div class="cfg-clabel">Compétition</div><div class="cfg-csub">Concours et tournois officiels</div></div></div>
+                            </div>
+                            <div class="cfg-actions">
+                                <button class="cfg-btn cfg-next" id="cfgN1" disabled>Suivant →</button>
+                            </div>
+                        </div>
+
+                        <!-- Q2 — Poste -->
+                        <div class="cfg-q" id="cfgQ2">
+                            <h3>Quel est votre poste ?</h3>
+                            <p class="cfg-hint">Chaque rôle demande des caractéristiques différentes.</p>
+                            <div class="cfg-choices" data-q="2">
+                                <div class="cfg-choice" data-v="pointeur"><span class="cfg-dot"></span><div><div class="cfg-clabel">Pointeur</div><div class="cfg-csub">Précision, placement, donnée</div></div></div>
+                                <div class="cfg-choice" data-v="tireur"><span class="cfg-dot"></span><div><div class="cfg-clabel">Tireur</div><div class="cfg-csub">Tir, carreau, élimination</div></div></div>
+                                <div class="cfg-choice" data-v="milieu"><span class="cfg-dot"></span><div><div class="cfg-clabel">Milieu</div><div class="cfg-csub">Polyvalent, point et tir selon la mène</div></div></div>
+                            </div>
+                            <div class="cfg-actions">
+                                <button class="cfg-btn cfg-prev" id="cfgP2">← Retour</button>
+                                <button class="cfg-btn cfg-next" id="cfgN2" disabled>Suivant →</button>
+                            </div>
+                        </div>
+
+                        <!-- Q3 — Main -->
+                        <div class="cfg-q" id="cfgQ3">
+                            <h3>Quelle est la taille de votre main ?</h3>
+                            <p class="cfg-hint">Mesurez du pli du poignet au bout du majeur, main à plat.</p>
+                            <div class="cfg-slider-block">
+                                <div class="cfg-sdisp">
+                                    <span class="cfg-snum" id="cfgHVal">185</span><span class="cfg-smm">mm</span>
+                                </div>
+                                <input type="range" id="cfgSlider" min="150" max="230" value="185" step="1">
+                                <div class="cfg-slabels"><span>150 mm</span><span>230 mm</span></div>
+                                <div class="cfg-shint" id="cfgSizeHint">Main moyenne — diamètre conseillé : 73 à 75 mm</div>
+                            </div>
+                            <div class="cfg-actions">
+                                <button class="cfg-btn cfg-prev" id="cfgP3">← Retour</button>
+                                <button class="cfg-btn cfg-next" id="cfgN3">Suivant →</button>
+                            </div>
+                        </div>
+
+                        <!-- Q4 — Terrain -->
+                        <div class="cfg-q" id="cfgQ4">
+                            <h3>Sur quel type de terrain jouez-vous ?</h3>
+                            <p class="cfg-hint">Le sol influence la dureté et les stries à privilégier.</p>
+                            <div class="cfg-choices" data-q="4">
+                                <div class="cfg-choice" data-v="souple"><span class="cfg-dot"></span><div><div class="cfg-clabel">Souple</div><div class="cfg-csub">Sable, terre meuble, boulodrome couvert</div></div></div>
+                                <div class="cfg-choice" data-v="dur"><span class="cfg-dot"></span><div><div class="cfg-clabel">Dur</div><div class="cfg-csub">Gravier, cailloux, terrain sec</div></div></div>
+                                <div class="cfg-choice" data-v="mixte"><span class="cfg-dot"></span><div><div class="cfg-clabel">Variable</div><div class="cfg-csub">Je joue un peu partout</div></div></div>
+                            </div>
+                            <div class="cfg-actions">
+                                <button class="cfg-btn cfg-prev" id="cfgP4">← Retour</button>
+                                <button class="cfg-btn cfg-next" id="cfgN4" disabled>Suivant →</button>
+                            </div>
+                        </div>
+
+                        <!-- Q5 — Matériau -->
+                        <div class="cfg-q" id="cfgQ5">
+                            <h3>Avez-vous une préférence de matériau ?</h3>
+                            <p class="cfg-hint">Chaque acier a ses avantages au quotidien.</p>
+                            <div class="cfg-choices" data-q="5">
+                                <div class="cfg-choice" data-v="inox"><span class="cfg-dot"></span><div><div class="cfg-clabel">Inox</div><div class="cfg-csub">Zéro entretien, brillant, durable</div></div></div>
+                                <div class="cfg-choice" data-v="carbone"><span class="cfg-dot"></span><div><div class="cfg-clabel">Acier carbone</div><div class="cfg-csub">Meilleur grip, entretien après chaque partie</div></div></div>
+                                <div class="cfg-choice" data-v="indifferent"><span class="cfg-dot"></span><div><div class="cfg-clabel">Pas de préférence</div><div class="cfg-csub">Conseillez-moi selon mon profil</div></div></div>
+                            </div>
+                            <div class="cfg-actions">
+                                <button class="cfg-btn cfg-prev" id="cfgP5">← Retour</button>
+                                <button class="cfg-btn cfg-next" id="cfgN5" disabled>Voir le résultat →</button>
+                            </div>
+                        </div>
+
+                        <!-- Résultat -->
+                        <div class="cfg-result" id="cfgResult">
+                            <h3 class="cfg-rtitle">Votre boule idéale</h3>
+                            <p class="cfg-rsub" id="cfgResSub"></p>
+                            <div class="cfg-specs" id="cfgResSpecs"></div>
+                            <div class="cfg-profile" id="cfgResProfile"></div>
+                            <div class="cfg-tips" id="cfgResTips"></div>
+                            <button class="cfg-reset" id="cfgReset">← Recommencer</button>
+                        </div>
+
+                    </div>
+                    <!-- ═══ FIN CONFIGURATEUR ═══ -->
+
+
                     <h2>Loisir ou compétition : quel type de boule ?</h2>
 
                     <p>Le niveau de pratique détermine le type de boules à choisir. Les parties occasionnelles entre amis ou en famille s'accommodent parfaitement des boules de loisir. Disponibles en un seul poids et diamètre, ces boules lestées (sable ou eau) s'adaptent à toutes les mains et facilitent le jeu.</p>
@@ -401,7 +759,6 @@
                     <nav class="footer-links">
                         <a href="contact" class="footer-link">Nous contacter</a>
                         <a href="a-propos" class="footer-link">À propos</a>
-                        
                     </nav>
                 </div>
             </div>
@@ -423,7 +780,6 @@
             const navList = document.querySelector('.nav-list');
             const dropdownItems = document.querySelectorAll('.nav-item--dropdown');
 
-            // Effet scroll sur le header
             window.addEventListener('scroll', function() {
                 if (window.pageYOffset > 50) {
                     header.classList.add('scrolled');
@@ -432,7 +788,6 @@
                 }
             }, { passive: true });
 
-            // Toggle menu mobile
             if (navToggle) {
                 navToggle.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -446,7 +801,6 @@
                 });
             }
 
-            // Toggle dropdowns sur mobile
             dropdownItems.forEach(function(item) {
                 const link = item.querySelector(':scope > .nav-link');
                 if (link) {
@@ -465,7 +819,6 @@
                 }
             });
 
-            // Fermer le menu au clic en dehors
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.main-nav') && !e.target.closest('.nav-toggle')) {
                     navToggle.classList.remove('is-active');
@@ -478,7 +831,6 @@
                 }
             });
 
-            // Fermer le menu sur resize si on passe en desktop
             window.addEventListener('resize', function() {
                 if (window.innerWidth > 1024) {
                     navToggle.classList.remove('is-active');
@@ -491,6 +843,166 @@
                 }
             });
         });
+    </script>
+
+    <!-- Configurateur JS -->
+    <script>
+    (function(){
+        var S={step:1,niveau:null,poste:null,hand:185,terrain:null,mat:null};
+
+        document.querySelectorAll('.cfg-choices').forEach(function(g){
+            g.querySelectorAll('.cfg-choice').forEach(function(c){
+                c.addEventListener('click',function(){
+                    g.querySelectorAll('.cfg-choice').forEach(function(x){x.classList.remove('cfg-sel')});
+                    c.classList.add('cfg-sel');
+                    var q=g.dataset.q, v=c.dataset.v;
+                    if(q==='1')S.niveau=v;
+                    if(q==='2')S.poste=v;
+                    if(q==='4')S.terrain=v;
+                    if(q==='5')S.mat=v;
+                    document.getElementById('cfgN'+q).disabled=false;
+                });
+            });
+        });
+
+        var sl=document.getElementById('cfgSlider');
+        sl.addEventListener('input',function(){
+            S.hand=+sl.value;
+            document.getElementById('cfgHVal').textContent=S.hand;
+            updHint();
+        });
+
+        function updHint(){
+            var v=S.hand,l,r;
+            if(v<170){l='Petite main';r='71 à 73 mm'}
+            else if(v<190){l='Main moyenne';r='73 à 75 mm'}
+            else if(v<210){l='Grande main';r='75 à 77 mm'}
+            else{l='Très grande main';r='77 à 80 mm'}
+            document.getElementById('cfgSizeHint').textContent=l+' — diamètre conseillé : '+r;
+        }
+
+        function go(n){
+            S.step=n;
+            document.querySelectorAll('.cfg-q').forEach(function(b){b.classList.remove('cfg-active')});
+            document.getElementById('cfgResult').classList.remove('cfg-active');
+            if(n<=5){
+                document.getElementById('cfgQ'+n).classList.add('cfg-active');
+                document.getElementById('cfgLabel').textContent=n+' / 5';
+                document.getElementById('cfgBar').style.width=(n*20)+'%';
+                document.querySelector('.cfg-steps').style.display='flex';
+            }else{
+                render();
+                document.getElementById('cfgResult').classList.add('cfg-active');
+                document.querySelector('.cfg-steps').style.display='none';
+            }
+        }
+
+        document.getElementById('cfgN1').addEventListener('click',function(){go(2)});
+        document.getElementById('cfgN2').addEventListener('click',function(){go(3)});
+        document.getElementById('cfgN3').addEventListener('click',function(){go(4)});
+        document.getElementById('cfgN4').addEventListener('click',function(){go(5)});
+        document.getElementById('cfgN5').addEventListener('click',function(){go(6)});
+        document.getElementById('cfgP2').addEventListener('click',function(){go(1)});
+        document.getElementById('cfgP3').addEventListener('click',function(){go(2)});
+        document.getElementById('cfgP4').addEventListener('click',function(){go(3)});
+        document.getElementById('cfgP5').addEventListener('click',function(){go(4)});
+
+        document.getElementById('cfgReset').addEventListener('click',function(){
+            S.niveau=S.poste=S.terrain=S.mat=null;S.hand=185;
+            document.querySelectorAll('.cfg-choice').forEach(function(c){c.classList.remove('cfg-sel')});
+            document.querySelectorAll('.cfg-next').forEach(function(b){b.disabled=true});
+            document.getElementById('cfgN3').disabled=false;
+            sl.value=185;document.getElementById('cfgHVal').textContent='185';updHint();
+            go(1);
+        });
+
+        function compute(){
+            var niveau=S.niveau,poste=S.poste,hand=S.hand,terrain=S.terrain,mat=S.mat;
+            var dMin,dMax;
+            if(hand<170){dMin=71;dMax=73}
+            else if(hand<190){dMin=73;dMax=75}
+            else if(hand<210){dMin=75;dMax=77}
+            else{dMin=77;dMax=80}
+            if(poste==='pointeur'){dMin=Math.max(70.5,dMin-1);dMax=Math.max(dMin,dMax-1)}
+            if(poste==='tireur'){dMin=Math.min(dMin+1,80);dMax=Math.min(dMax+1,80)}
+
+            var pMin,pMax,pNote;
+            if(poste==='pointeur'){pMin=700;pMax=720;pNote='Lourd — meilleur arrêt au sol'}
+            else if(poste==='tireur'){pMin=680;pMax=690;pNote='Léger — moins de fatigue au tir'}
+            else{pMin=690;pMax=710;pNote='Intermédiaire — polyvalent'}
+
+            var dLab,dHRC;
+            if(poste==='tireur'){dLab='Tendre';dHRC='35 – 38 HRC'}
+            else if(poste==='pointeur'){dLab='Dure';dHRC='42+ HRC'}
+            else{dLab='Demi-tendre';dHRC='39 – 41 HRC'}
+            if(terrain==='dur'&&poste!=='pointeur'){dLab='Tendre';dHRC='35 – 38 HRC'}
+            if(terrain==='souple'&&poste==='tireur'){dLab='Demi-tendre';dHRC='39 – 41 HRC'}
+
+            var mLab,mDet;
+            if(mat==='inox'){mLab='Inox';mDet='Pas de rouille, longue durée'}
+            else if(mat==='carbone'){mLab='Acier carbone';mDet='Grip supérieur, entretien nécessaire'}
+            else{
+                if(poste==='tireur'){mLab='Acier carbone';mDet='Recommandé pour le grip au tir'}
+                else if(poste==='pointeur'){mLab='Inox';mDet='Recommandé pour la durabilité'}
+                else{mLab='Inox ou carbone';mDet='Les deux conviennent, testez en main'}
+            }
+
+            var stries;
+            if(poste==='pointeur')stries='Striées — bonne accroche au sol';
+            else if(poste==='tireur')stries='Lisses ou stries fines';
+            else stries='Stries moyennes — polyvalent';
+
+            var budget;
+            if(niveau==='loisir')budget='30 – 60 €';
+            else if(niveau==='regulier')budget='80 – 150 €';
+            else budget='150 – 350 €';
+            var type=niveau==='loisir'?'Loisir (non homologuées)':'Homologuées FIPJP';
+
+            var posteN={pointeur:'Pointeur',tireur:'Tireur',milieu:'Milieu'};
+            var nivN={loisir:'Loisir',regulier:'Régulier',competition:'Compétition'};
+
+            var profText;
+            if(poste==='pointeur')profText="Votre jeu repose sur la précision et le contrôle de la donnée. Des boules lourdes et dures offrent un meilleur arrêt au sol et une longévité accrue. Les stries améliorent l'accroche sur les terrains variés.";
+            else if(poste==='tireur')profText="Votre jeu demande puissance et amorti. Des boules légères et tendres réduisent la fatigue sur les longues parties et limitent les rebonds pour faciliter les carreaux.";
+            else profText="Votre polyvalence impose un compromis équilibré entre point et tir. Des caractéristiques intermédiaires vous permettent d'alterner les deux sans modifier votre geste.";
+
+            var tips=[];
+            if(niveau==='loisir'){
+                tips.push("Des boules de loisir lestées suffisent pour des parties occasionnelles.");
+                tips.push("Si le jeu vous plaît, passez à des boules homologuées d'entrée de gamme.");
+            }else{
+                tips.push("Essayez toujours plusieurs modèles en main avant d'acheter.");
+                if(niveau==='regulier')tips.push("Des boules homologuées premier prix (moins de 100 €) suffisent pour progresser.");
+                if(niveau==='competition')tips.push("Investissez dans la qualité : une bonne triplette dure des années.");
+            }
+            if(mat==='carbone'||(mat==='indifferent'&&mLab.indexOf('carbone')!==-1))
+                tips.push("Nettoyez et graissez vos boules carbone après chaque partie pour éviter la rouille.");
+            tips.push("Visez un rapport de densité supérieur à 3 pour un comportement stable sur terrain accidenté.");
+
+            return{dMin:dMin,dMax:dMax,pMin:pMin,pMax:pMax,pNote:pNote,dLab:dLab,dHRC:dHRC,
+                mLab:mLab,mDet:mDet,stries:stries,budget:budget,type:type,
+                profTitle:nivN[niveau]+' · '+posteN[poste],profText:profText,tips:tips};
+        }
+
+        function render(){
+            var r=compute();
+            document.getElementById('cfgResSub').textContent=r.profTitle;
+            document.getElementById('cfgResSpecs').innerHTML=[
+                row('Diamètre',r.dMin+' – '+r.dMax+' mm',''),
+                row('Poids',r.pMin+' – '+r.pMax+' g',r.pNote),
+                row('Dureté',r.dLab,r.dHRC),
+                row('Matériau',r.mLab,r.mDet),
+                row('Stries',r.stries,''),
+                row('Budget indicatif',r.budget,r.type)
+            ].join('');
+            document.getElementById('cfgResProfile').innerHTML='<h4>'+r.profTitle+'</h4><p>'+r.profText+'</p>';
+            document.getElementById('cfgResTips').innerHTML='<h4>Conseils</h4><ul>'+r.tips.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul>';
+        }
+
+        function row(l,m,d){
+            return '<div class="cfg-srow"><span class="cfg-slbl">'+l+'</span><span class="cfg-sval"><span class="cfg-smain">'+m+'</span>'+(d?'<div class="cfg-sdet">'+d+'</div>':'')+'</span></div>';
+        }
+    })();
     </script>
 </body>
 </html>
